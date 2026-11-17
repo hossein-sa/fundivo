@@ -1,0 +1,58 @@
+
+# ==========================================
+# Fundivo - Git Ignore
+# ==========================================
+
+# Private project documents
+AGENTS.md
+PROJECT_SPEC.md
+ROADMAP.md
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# PyCharm / JetBrains
+.idea/
+*.iml
+
+# Testing and coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.ruff_cache/
+.mypy_cache/
+
+# Local databases
+*.sqlite3
+*.db
+
+# Logs
+*.log
+logs/
+
+# Uploaded files
+media/
+
+# Generated static files
+staticfiles/
+
+# Operating system
+.DS_Store
+Thumbs.db
+desktop.ini
