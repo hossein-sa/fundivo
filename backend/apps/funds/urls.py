@@ -2,6 +2,8 @@
 
 from django.urls import path
 
+from apps.invitations.views import FundInvitationsView, InvitationRevokeView
+
 from .views import (
     FundDetailView,
     FundListCreateView,
@@ -10,6 +12,16 @@ from .views import (
 )
 
 urlpatterns = [
+    path(
+        "<uuid:fund_id>/invitations/",
+        FundInvitationsView.as_view(),
+        name="fund-invitation-list",
+    ),
+    path(
+        "<uuid:fund_id>/invitations/<uuid:invitation_id>/revoke/",
+        InvitationRevokeView.as_view(),
+        name="fund-invitation-revoke",
+    ),
     path("", FundListCreateView.as_view(), name="fund-list"),
     path("<uuid:fund_id>/", FundDetailView.as_view(), name="fund-detail"),
     path(

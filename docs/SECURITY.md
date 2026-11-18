@@ -491,3 +491,12 @@ Only active managers may list memberships or edit drafts. Membership list
 responses do not expose phone numbers. Database constraints protect against
 duplicate memberships and concurrent second active managers. Audit logging
 is initial application-level history, not an immutable financial ledger.
+
+## Invitation security — implemented initial scope
+
+Random code digest only in PostgreSQL, phone-bound HMAC fingerprint (not plaintext
+recipient phone), verified JWT recipient acceptance, transactional one-use
+execution, fund-level authorization, audit without code/phone, 48-hour expiration,
+and basic fund-scoped issuance rate limiting. Do not share invitation codes in
+logs, public links or issue tracker screenshots. Production notifications, IP-based
+abuse controls, and secure code delivery remain pending.

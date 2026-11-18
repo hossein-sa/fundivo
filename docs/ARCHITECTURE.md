@@ -123,3 +123,9 @@ GitHub Actions runs automated checks for:
 The `apps.funds` module contains `Fund`, `FundMembership` and `AuditLog`.
 Fund creation and draft edits use a service layer with database transactions;
 fund-level querysets enforce access isolation. See [FUNDS.md](FUNDS.md).
+
+## Invitation module — initial implementation
+
+`apps.invitations` owns the invitation record, token hashing, recipient identity
+binding, transaction-safe consent workflows, HTTP serializers and views.
+The fund model/membership roles stay in `apps.funds`. See [INVITATIONS.md](INVITATIONS.md).

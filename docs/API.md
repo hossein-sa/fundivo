@@ -329,3 +329,9 @@ current limitations. Endpoints under `/api/v1/funds/` are JWT-protected:
 GET/POST list/create, GET/PATCH detail, GET own membership and GET memberships
 (manager only). List responses are paginated. Fund status and role are not
 client-writeable. Non-members receive 404 for protected fund resources.
+
+## Invitation API — initial implementation
+
+Authenticated fund managers can issue/list/revoke invitation codes for draft funds.
+Verified recipients accept or reject using a code. See [INVITATIONS.md](INVITATIONS.md)
+for endpoints, access rules, errors, security constraints and limitations.

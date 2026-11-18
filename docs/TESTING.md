@@ -413,3 +413,10 @@ cross-fund IDOR isolation, unauthorized changes, draft edits, audit events,
 atomic rollback, and PostgreSQL uniqueness constraints. Run with the existing
 `pytest -c backend/pytest.ini backend/tests -v` command. No separate
 SQLite test path is supported for these database constraints.
+
+## Invitation tests — Phase 3 initial slice
+
+`backend/tests/test_invitations.py` verifies manager-only issuance, target phone
+identity enforcement, code secrecy/replay protection, expiration, duplicate
+membership/invitation rejection, audit and rollback, fund isolation and revocation.
+Use the existing full pytest/CI workflow; no real SMS service is called.

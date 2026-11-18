@@ -215,3 +215,11 @@ Database constraints enforce unique `(fund,user)`, at most one active manager
 per fund, allowed roles/states and a non-empty fund name. A manager is created
 atomically with the fund. Guest membership and manager transfer are future work.
 See [FUNDS.md](FUNDS.md).
+
+## Invitation model — initial implementation
+
+`invitations.Invitation` stores UUID, fund FK, creator FK, target phone HMAC,
+random invitation code SHA-256 digest (never plaintext), status, issued/expiry
+and optional response metadata. A partial unique constraint permits only one
+pending invitation for a given `(fund, target_fingerprint)`. Expiry is checked
+on consumption; older expired pending invitations are marked expired upon reissue.

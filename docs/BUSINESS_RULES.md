@@ -337,3 +337,12 @@ that user an active manager membership and writes an audit event.
 Draft `name` and `description` are manager-editable. A user can have roles in
 multiple funds. Invitation acceptance, manager transfer, activation and
 financial configuration remain pending; do not infer these are implemented.
+
+## Invitations — implemented limited policy
+
+Managers may issue up to 20 invitations per fund per 24 hours for draft funds.
+Codes expire after 48 hours and target one verified Iranian mobile; issuance
+never creates an account or membership. Only the intended verified user may
+accept/reject, and acceptance creates a regular `member` membership with an audit
+record. Manager revocation is supported. Guest membership, shares and manager
+transfer remain OPEN and are not implicitly authorized by this workflow.

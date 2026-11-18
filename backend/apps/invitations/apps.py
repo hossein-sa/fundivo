@@ -1,0 +1,10 @@
+"""Fund-scoped invitations for verified user accounts."""
+
+from django.apps import AppConfig
+
+
+class InvitationsConfig(AppConfig):
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "apps.invitations"
+    label = "invitations"
+    verbose_name = "Fund Invitations"

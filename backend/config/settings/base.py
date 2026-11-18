@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     # Local applications
     "apps.accounts.apps.AccountsConfig",
     "apps.funds.apps.FundsConfig",
+    "apps.invitations.apps.InvitationsConfig",
 ]
 
 MIDDLEWARE = [
@@ -154,6 +155,12 @@ SPECTACULAR_SETTINGS = {
     "DESCRIPTION": "REST API for community fund management.",
     "VERSION": "1.0.0",
     "SERVE_INCLUDE_SCHEMA": False,
+
+    "ENUM_NAME_OVERRIDES": {
+        "FundStatusEnum": "apps.funds.models.Fund.Status",
+        "InvitationStatusEnum": "apps.invitations.models.Invitation.Status",
+    },
+
 }
 
 AUTH_USER_MODEL = "accounts.User"

@@ -14,7 +14,7 @@ Implemented:
 - Fund-scoped queryset filtering, negative authorization tests, and database uniqueness constraints.
 - Read-only Django Admin for the three domain tables.
 
-**Not implemented**: sending/accepting invitations, attaching other users to funds via API, temporary/guest memberships, manager transfer and acceptance, status activation, financial configuration, shares, rounds, archives, and comprehensive immutable audit storage. This is intentional: no person is made a fund member through an unconsented manager action. Those workflows belong to future packages.
+**Not implemented**: temporary/guest memberships, manager transfer and acceptance, status activation, financial configuration, shares, rounds, archives, and comprehensive immutable audit storage. This is intentional: no person is made a fund member through an unconsented manager action. Those workflows belong to future packages.
 
 ## Domain model
 
@@ -99,3 +99,11 @@ python backend\manage.py spectacular --validate --fail-on-warn
 ```
 
 Do not edit migration files after they have been applied without reviewing the impact.
+
+## Invitation membership extension (Phase 3 — first slice)
+
+Manager-created mobile-bound codes can now be accepted/rejected by a verified
+recipient. The manager can list metadata or revoke a pending invitation. This
+creates a regular member with consent and preserves fund scoping. See
+[INVITATIONS.md](INVITATIONS.md). Guest memberships, shares, activation and
+management transfer are not available yet.

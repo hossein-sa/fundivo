@@ -32,3 +32,10 @@ and plans to use Semantic Versioning for releases.
 ## Releases
 
 No official versions have been released yet.
+
+### Added — targeted fund invitations
+
+- Secure code-based invitations for draft funds with accept/reject/revoke endpoints.
+- Mobile-bound consent, token hashing, expiration, request limits, audit events,
+  and membership uniqueness protections.
+- Invitation API tests and design documentation.

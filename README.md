@@ -145,4 +145,11 @@ Authenticated users can create draft funds using `POST /api/v1/funds/`.
 The creator becomes the manager in the same database transaction.
 `GET /api/v1/funds/` lists only funds with an active membership.
 Other routes and the current limitations are documented in [docs/FUNDS.md](docs/FUNDS.md).
-Invitation acceptance, manager transfer, activation, financial settings and shares are not yet implemented.
+Manager transfer, activation, financial settings and shares are not yet implemented.
+
+## Invitation API (Phase 3 — initial slice)
+
+Managers can issue mobile-bound invitation codes for draft funds. The recipient must
+sign in with their verified mobile to accept or reject. Codes are returned only once,
+are never stored in plaintext, and expire in 48 hours. See [Invitations](docs/INVITATIONS.md)
+for the API contract and manual test procedure.
