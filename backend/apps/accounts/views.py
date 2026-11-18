@@ -43,8 +43,8 @@ def _client_ip(request):
 
 
 class OTPRequestView(APIView):
-    authentication_classes = []
-    permission_classes = [AllowAny]
+    authentication_classes = ()
+    permission_classes = (AllowAny,)
 
     @extend_schema(
         tags=["Authentication"],
@@ -68,8 +68,8 @@ class OTPRequestView(APIView):
 
 
 class OTPVerifyView(APIView):
-    authentication_classes = []
-    permission_classes = [AllowAny]
+    authentication_classes = ()
+    permission_classes = (AllowAny,)
 
     @extend_schema(
         tags=["Authentication"],
