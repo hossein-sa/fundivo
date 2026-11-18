@@ -79,3 +79,10 @@ python backend\manage.py check
 python backend\manage.py makemigrations --check --dry-run
 python backend\manage.py spectacular --validate --fail-on-warn --file "$env:TEMP\fundivo-schema.yaml"
 ```
+
+## Accepted memberships and shares
+
+Once an invitation is accepted, the resulting active registered membership
+can receive one or more shares from the fund manager during draft. Issuing or
+accepting an invitation does not automatically allocate shares. See
+[SHARES.md](SHARES.md).

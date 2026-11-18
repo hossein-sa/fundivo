@@ -17,6 +17,11 @@ class StrictWriteSerializer(serializers.ModelSerializer):
             )
         return super().to_internal_value(data)
 
+    def validate_target_share_count(self, value):
+        if value is not None and value < 1:
+            raise serializers.ValidationError("Target share count must be positive.")
+        return value
+
     def validate_name(self, value):
         cleaned = value.strip()
         if not cleaned:
@@ -27,13 +32,13 @@ class StrictWriteSerializer(serializers.ModelSerializer):
 class FundCreateSerializer(StrictWriteSerializer):
     class Meta:
         model = Fund
-        fields = ("name", "description")
+        fields = ("name", "description", "target_share_count")
 
 
 class FundEditSerializer(StrictWriteSerializer):
     class Meta:
         model = Fund
-        fields = ("name", "description")
+        fields = ("name", "description", "target_share_count")
 
 
 class FundReadSerializer(serializers.ModelSerializer):
@@ -42,7 +47,7 @@ class FundReadSerializer(serializers.ModelSerializer):
     class Meta:
         model = Fund
         fields = (
-            "id", "name", "description", "status", "created_at", "updated_at", "my_role"
+            "id", "name", "description", "target_share_count", "status", "created_at", "updated_at", "my_role"
         )
         read_only_fields = fields
 

@@ -335,3 +335,15 @@ client-writeable. Non-members receive 404 for protected fund resources.
 Authenticated fund managers can issue/list/revoke invitation codes for draft funds.
 Verified recipients accept or reject using a code. See [INVITATIONS.md](INVITATIONS.md)
 for endpoints, access rules, errors, security constraints and limitations.
+
+## Shares API — draft allocations
+
+`PATCH /api/v1/funds/{fund_id}/` accepts `target_share_count` for a draft fund.
+`GET /api/v1/funds/{fund_id}/shares/` returns a paginated list: managers see all
+shares, regular members only their own. `GET /api/v1/funds/{fund_id}/shares/{share_id}/`
+enforces the same scope (nonvisible shares return 404).
+Managers allocate via `POST /api/v1/funds/{fund_id}/shares/` with JSON
+`{"membership_id": "<uuid>", "count": 2, "allocation_id": "<new-uuid>"}`.
+Initial success returns 201; the same request ID and matching inputs return
+200 without additional shares. Conflicting reuse or exceeded capacity returns
+409. Allocation is limited to active memberships and draft funds.

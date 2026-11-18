@@ -420,3 +420,10 @@ SQLite test path is supported for these database constraints.
 identity enforcement, code secrecy/replay protection, expiration, duplicate
 membership/invitation rejection, audit and rollback, fund isolation and revocation.
 Use the existing full pytest/CI workflow; no real SMS service is called.
+
+## Shares — new tests
+
+`backend/tests/test_shares.py` checks manager authorization, share ownership
+isolation, capacity, allocation idempotency, target count edits, rejected
+cross-fund membership IDs, database uniqueness constraints and atomic rollback.
+Use the existing PostgreSQL-backed pytest suite and CI pipeline.

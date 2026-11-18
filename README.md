@@ -153,3 +153,11 @@ Managers can issue mobile-bound invitation codes for draft funds. The recipient 
 sign in with their verified mobile to accept or reject. Codes are returned only once,
 are never stored in plaintext, and expire in 48 hours. See [Invitations](docs/INVITATIONS.md)
 for the API contract and manual test procedure.
+
+## Shares API (draft funds)
+
+A manager can set `target_share_count` on a draft fund, allocate multiple
+individual shares to active registered memberships, and safely retry allocations
+using a client-generated UUID (`allocation_id`). Managers can list all shares;
+ordinary members can list and read only their own shares. See [SHARES](docs/SHARES.md).
+Guest membership, share transfers, money amounts and fund activation are pending.

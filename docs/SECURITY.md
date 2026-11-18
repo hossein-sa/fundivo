@@ -500,3 +500,12 @@ execution, fund-level authorization, audit without code/phone, 48-hour expiratio
 and basic fund-scoped issuance rate limiting. Do not share invitation codes in
 logs, public links or issue tracker screenshots. Production notifications, IP-based
 abuse controls, and secure code delivery remain pending.
+
+## Shares — initial security controls
+
+Managers alone may allocate shares; active members can view only their own
+shares, while managers can view all. Foreign fund membership IDs return 404.
+A fund-level PostgreSQL lock serializes allocations and protects capacity.
+Allocation IDs protect against accidental duplicate API retries. Assignment
+and audit occur in one database transaction. This does not yet provide an
+immutable financial ledger or complete share-transfer security.

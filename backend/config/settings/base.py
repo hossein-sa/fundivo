@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     "apps.accounts.apps.AccountsConfig",
     "apps.funds.apps.FundsConfig",
     "apps.invitations.apps.InvitationsConfig",
+    "apps.shares.apps.SharesConfig",
 ]
 
 MIDDLEWARE = [

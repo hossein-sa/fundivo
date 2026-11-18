@@ -346,3 +346,13 @@ never creates an account or membership. Only the intended verified user may
 accept/reject, and acceptance creates a regular `member` membership with an audit
 record. Manager revocation is supported. Guest membership, shares and manager
 transfer remain OPEN and are not implicitly authorized by this workflow.
+
+## Shares — first implemented slice
+
+An active fund manager may allocate 1–20 participation units per request to an
+active registered membership while the fund is in draft. A draft fund must
+first define a positive `target_share_count`, which caps total allocations.
+Each share has its own UUID and per-fund sequence number. A member may own
+multiple shares and the manager need not hold any. Retried requests with a
+matching allocation UUID do not create new shares. Transfer, guest ownership,
+exit, rounding, obligations and activation remain OPEN.

@@ -13,7 +13,9 @@ class FundConflict(APIException):
 
 
 @transaction.atomic
-def create_fund(*, creator, name: str, description: str = "") -> Fund:
+def create_fund(
+    *, creator, name: str, description: str = "", target_share_count: int | None = None
+) -> Fund:
     """A new fund and its manager must be created as one atomic operation."""
     if not creator.is_active or not creator.is_phone_verified:
         raise PermissionDenied("A verified active account is required.")
@@ -22,6 +24,7 @@ def create_fund(*, creator, name: str, description: str = "") -> Fund:
         created_by=creator,
         name=name,
         description=description,
+        target_share_count=target_share_count,
     )
     FundMembership.objects.create(
         fund=fund,
@@ -33,7 +36,10 @@ def create_fund(*, creator, name: str, description: str = "") -> Fund:
         actor=creator,
         action="fund.created",
         target_id=fund.pk,
-        changed_fields=["name", "description"],
+        changed_fields=[
+            "name", "description",
+            *(["target_share_count"] if target_share_count is not None else []),
+        ],
     )
     return fund
 
@@ -53,6 +59,11 @@ def edit_fund_draft(*, fund_id, actor, changes: dict) -> Fund:
     if fund.status != Fund.Status.DRAFT:
         raise FundConflict()
 
+    if "target_share_count" in changes:
+        new_target = changes["target_share_count"]
+        allocated = fund.shares.count()
+        if allocated and (new_target is None or new_target < allocated):
+            raise FundConflict("Target share count cannot be less than allocated shares.")
     changed_fields = [key for key, value in changes.items() if getattr(fund, key) != value]
     if changed_fields:
         for key in changed_fields:

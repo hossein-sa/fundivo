@@ -18,6 +18,7 @@ class Fund(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=120)
     description = models.TextField(blank=True)
+    target_share_count = models.PositiveIntegerField(null=True, blank=True)
     status = models.CharField(max_length=12, choices=Status.choices, default=Status.DRAFT)
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -31,6 +32,10 @@ class Fund(models.Model):
         ordering = ("-created_at", "-id")
         constraints = (
             models.CheckConstraint(condition=~Q(name=""), name="fund_name_not_empty"),
+            models.CheckConstraint(
+                condition=Q(target_share_count__isnull=True) | Q(target_share_count__gte=1),
+                name="fund_target_shares_positive",
+            ),
             models.CheckConstraint(
                 condition=Q(status__in=["draft", "active", "paused", "completed", "cancelled"]),
                 name="fund_valid_status",

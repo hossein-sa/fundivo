@@ -39,3 +39,9 @@ No official versions have been released yet.
 - Mobile-bound consent, token hashing, expiration, request limits, audit events,
   and membership uniqueness protections.
 - Invitation API tests and design documentation.
+
+### Added — draft participation shares
+
+- Share UUIDs and per-fund sequential numbers with database uniqueness constraints.
+- Draft share capacity and atomic, idempotent manager-only allocation.
+- Fund-scoped share reads, audit events and permission/integrity tests.

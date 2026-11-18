@@ -1,0 +1,1 @@
+"""Fund share allocation domain."""

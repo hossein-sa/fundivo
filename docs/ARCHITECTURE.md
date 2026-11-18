@@ -129,3 +129,10 @@ fund-level querysets enforce access isolation. See [FUNDS.md](FUNDS.md).
 `apps.invitations` owns the invitation record, token hashing, recipient identity
 binding, transaction-safe consent workflows, HTTP serializers and views.
 The fund model/membership roles stay in `apps.funds`. See [INVITATIONS.md](INVITATIONS.md).
+
+## Shares module — implemented initial slice
+
+The `apps.shares` domain stores individual participation units, separate
+from user identity and membership role. Allocations are managed by a service
+with fund row locking and audit logging; non-manager reads are restricted to
+shares owned by their membership. See [SHARES.md](SHARES.md).

@@ -223,3 +223,14 @@ random invitation code SHA-256 digest (never plaintext), status, issued/expiry
 and optional response metadata. A partial unique constraint permits only one
 pending invitation for a given `(fund, target_fingerprint)`. Expiry is checked
 on consumption; older expired pending invitations are marked expired upon reissue.
+
+## Shares — implemented initial schema
+
+`funds.Fund.target_share_count` is optional on draft funds and constrained to
+positive values when set. `shares.Share` contains UUID, fund FK, membership FK,
+positive sequential number (unique within fund), allocation UUID and timestamp.
+The service checks that membership belongs to the fund, since a pair of simple
+foreign keys does not by itself enforce a composite cross-fund invariant.
+Database constraints, a locked fund row, and a transaction protect unique
+numbering and capacity during service-level allocations. No share deletion or
+transfer workflow exists yet.

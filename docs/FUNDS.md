@@ -107,3 +107,10 @@ recipient. The manager can list metadata or revoke a pending invitation. This
 creates a regular member with consent and preserves fund scoping. See
 [INVITATIONS.md](INVITATIONS.md). Guest memberships, shares, activation and
 management transfer are not available yet.
+
+## Planned share capacity now supported
+
+Draft funds may set `target_share_count`; it cannot be reduced below the
+number of allocated shares. See [SHARES.md](SHARES.md) for allocation and
+visibility rules. Financial settings, activation and manager transfers remain
+future work.
