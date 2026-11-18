@@ -1,52 +1,120 @@
-
 # Fundivo
 
-Fundivo is a community fund management platform designed for managing rotating savings and interest-free lending groups.
+Fundivo is a community fund management platform for
+rotating savings and interest-free lending groups.
 
-## Overview
+## Project Status
 
-Fundivo provides tools for managing:
+Under active development.
 
-- Community funds and memberships
-- Member shares and contributions
-- Payment schedules and installments
-- Payment tracking and verification
-- Lottery-based winner selection
-- Payouts and settlements
-- Notifications and financial reports
+The backend infrastructure is being built.
+Business APIs and user authentication are not implemented yet.
 
 ## Architecture
 
-Fundivo uses a monorepo structure.
+Fundivo follows a Monorepo structure with a
+Modular Monolith backend.
 
 ```text
 fundivo/
-├── backend/    # Backend API
-├── frontend/   # Future web application
-└── infra/      # Infrastructure and deployment
+├── backend/       # Django REST API
+├── infra/         # Infrastructure files
+├── compose.yaml   # Local PostgreSQL
+└── README.md
 ```
-
-The backend follows a Modular Monolith architecture.
 
 ## Tech Stack
 
-### Backend
-- Python
+- Python 3.12
 - Django 5.2 LTS
 - Django REST Framework
-- PostgreSQL
-- pytest
+- PostgreSQL 17
+- Docker Compose
+- pytest / pytest-django
+- Ruff
 - drf-spectacular
 
-### Infrastructure
-- Docker
-- Docker Compose
+## Local Development
 
-### Frontend
-To be determined.
+### Prerequisites
 
-## Development Status
+- Python 3.12
+- Docker Desktop
+- Git
 
-Fundivo is in its initial development phase.
+### 1. Clone the repository
 
-Installation, configuration, testing, and API documentation instructions will be added as development progresses.
+```powershell
+git clone https://github.com/hossein-sa/fundivo.git
+cd fundivo
+```
+
+### 2. Create a virtual environment
+
+```powershell
+py -3.12 -m venv backend\.venv
+.\backend\.venv\Scripts\Activate.ps1
+```
+
+### 3. Install dependencies
+
+```powershell
+python -m pip install -r backend\requirements.txt
+```
+
+### 4. Configure environment variables
+
+```powershell
+Copy-Item backend\.env.example backend\.env
+```
+
+Edit `backend/.env` and replace the placeholder
+Django secret key and PostgreSQL password with
+secure, randomly generated values.
+
+Never commit `.env`.
+
+### 5. Start PostgreSQL
+
+```powershell
+docker compose --env-file backend/.env up -d db
+```
+
+### 6. Verify Django
+
+```powershell
+python backend\manage.py check
+```
+
+Do not run migrations yet. The initial Custom User
+Model must be implemented before the first migration.
+
+### 7. Run the development server
+
+```powershell
+python backend\manage.py runserver
+```
+
+## API Documentation
+
+Available in the development environment:
+
+- Swagger UI: http://127.0.0.1:8000/api/v1/docs/
+- ReDoc: http://127.0.0.1:8000/api/v1/redoc/
+- OpenAPI: http://127.0.0.1:8000/api/v1/schema/
+
+## Tests
+
+```powershell
+python -m pytest -c backend/pytest.ini backend/tests -v
+```
+
+## Code Quality
+
+```powershell
+python -m ruff check backend
+```
+
+## License
+
+Not specified yet.
