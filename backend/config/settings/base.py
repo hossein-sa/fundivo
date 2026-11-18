@@ -45,6 +45,9 @@ INSTALLED_APPS = [
     # Third-party applications
     "rest_framework",
     "drf_spectacular",
+
+    # Local applications
+    "apps.accounts.apps.AccountsConfig",
 ]
 
 MIDDLEWARE = [
@@ -129,7 +132,6 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
 # Django REST Framework
 
 REST_FRAMEWORK = {
@@ -150,3 +152,5 @@ SPECTACULAR_SETTINGS = {
     "VERSION": "1.0.0",
     "SERVE_INCLUDE_SCHEMA": False,
 }
+
+AUTH_USER_MODEL = "accounts.User"

@@ -1,0 +1,4 @@
+# Ruff configuration for Fundivo
+
+[lint.per-file-ignores]
+"backend/**/migrations/*.py" = ["I001", "RUF012"]

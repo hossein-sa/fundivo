@@ -81,6 +81,11 @@ jobs:
           connection.ensure_connection();
           print('PostgreSQL connection successful');
           connection.close()"
+      - name: Check migrations are committed
+        run: python backend/manage.py makemigrations --check --dry-run
+
+      - name: Apply migrations
+        run: python backend/manage.py migrate --noinput
 
       - name: Run tests
         run: python -m pytest -c backend/pytest.ini backend/tests -v
