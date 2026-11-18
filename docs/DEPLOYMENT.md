@@ -7,7 +7,7 @@ Fundivo currently records and manages financial activity; it does not process, h
 ## 1. Repository layout
 
 - `backend/`: Django API, tests, pinned Python requirements, and example environment variables.
-- `compose.yaml`: local PostgreSQL service.
+- `compose.yaml`: local PostgreSQL and ephemeral Redis services.
 - `infra/`: reserved for future infrastructure code.
 - `.github/workflows/backend-ci.yml`: automated backend checks.
 
@@ -66,7 +66,7 @@ These are the current project checks. Passing them is **not** evidence that the 
 
 ### Database migration safety
 
-**Do not run `migrate` yet.** The custom Django user model and `AUTH_USER_MODEL` must be added before the project's first migration. Once the user model is in place and migrations are reviewed, migration commands and deployment order will be documented here.
+The Custom User Model and initial migration are implemented. After reviewing migrations, run `python backend/manage.py migrate`.
 
 ## 6. Start the development server
 
@@ -94,7 +94,7 @@ This stops and removes the containers and network but preserves the named databa
 
 The repository workflow uses Ubuntu, Python 3.12, a temporary PostgreSQL 17 service, and test-only environment variables. It runs Ruff, Django system checks, OpenAPI validation, a PostgreSQL connection check, and pytest. CI does not read or upload the developer's local `.env` file.
 
-No migration step is run in the current infrastructure-only CI workflow. This must be revisited when domain models and migrations are introduced.
+CI now checks committed migrations and applies them to its temporary PostgreSQL service.
 
 ## 9. Production deployment — not implemented
 
@@ -110,3 +110,12 @@ A production release must have a reviewed, repeatable deployment configuration. 
 8. Review applicable privacy and legal requirements for the deployment jurisdiction.
 
 **No production host, cloud provider, secrets manager, deployment automation, or recovery objective has been chosen yet.** Document these decisions before the first production release.
+
+## OTP Development Service
+
+Start both services using `docker compose --env-file backend/.env up -d db redis`.
+For Django running on Windows, `REDIS_URL=redis://127.0.0.1:6379/0`.
+The OTP backend stores expiring Redis challenges; Redis persistence is disabled.
+The local plaintext test outbox is `backend/.otp-outbox` (ignored by Git).
+It must **never** be used in production; a real SMS provider and operations
+review are still required. See `docs/OTP.md`.

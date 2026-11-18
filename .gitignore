@@ -56,3 +56,6 @@ staticfiles/
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# Local plaintext OTP development outbox (sensitive)
+backend/.otp-outbox*

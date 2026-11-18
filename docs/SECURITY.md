@@ -444,8 +444,6 @@ Implemented:
 
 Not yet implemented:
 
-- Custom User Model
-- OTP authentication
 - JWT authentication and revocation
 - Fund-level object permissions
 - Business API rate limiting
@@ -472,3 +470,11 @@ Before production deployment:
 
 This document must be updated whenever
 security-sensitive functionality changes.
+
+## OTP Security Update
+
+OTP rate limiting, hashed challenges in Redis, limited attempts, and one-use
+verification are implemented for local development. Codes are visible only
+through an ignored local outbox, not in API responses/logs. JWT issuance,
+production SMS, and production-grade abuse controls remain pending.
+See `docs/OTP.md`.

@@ -201,7 +201,7 @@ python backend\manage.py spectacular --validate --fail-on-warn
 
 ## 8. Current Automated Tests
 
-The current infrastructure test suite contains
+The initial infrastructure suite contains
 five test cases:
 
 1. PostgreSQL database engine configuration
@@ -379,7 +379,7 @@ The following are not implemented yet:
 - Database integration tests
 - Business API tests
 - Financial concurrency tests
-- Authentication and permission tests
+- JWT and fund-level permission tests
 - Coverage reporting
 - Load and performance testing
 
@@ -394,3 +394,10 @@ Bug fixes should include regression tests.
 
 CI failures must be investigated before
 declaring a development milestone complete.
+
+## OTP Test Coverage Update
+
+`backend/tests/test_otp.py` tests OTP API contracts, invalid/expired codes,
+rate limits, cooldown, inactive users, single-use code consumption, and
+one-use login tickets using fakeredis. Production Redis connection is checked
+separately in GitHub Actions; a real concurrency stress test remains pending.

@@ -27,6 +27,7 @@ jobs:
       POSTGRES_PASSWORD: ci-test-password-only
       POSTGRES_HOST: 127.0.0.1
       POSTGRES_PORT: "5433"
+      REDIS_URL: redis://127.0.0.1:6379/0
 
     services:
       db:
@@ -42,6 +43,16 @@ jobs:
 
         options: >-
           --health-cmd "pg_isready -U fundivo -d fundivo"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+      redis:
+        image: redis:7.4-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
           --health-interval 5s
           --health-timeout 5s
           --health-retries 10
@@ -81,6 +92,13 @@ jobs:
           connection.ensure_connection();
           print('PostgreSQL connection successful');
           connection.close()"
+      - name: Check Redis connection
+        run: >
+          python backend/manage.py shell -c
+          "from apps.accounts.otp import get_redis;
+          assert get_redis().ping();
+          print('Redis connection successful')"
+
       - name: Check migrations are committed
         run: python backend/manage.py makemigrations --check --dry-run
 

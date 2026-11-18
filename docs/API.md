@@ -80,7 +80,7 @@ Django REST Framework currently uses:
 - SessionAuthentication
 - IsAuthenticated as the default permission
 
-OTP and JWT authentication are not implemented yet.
+OTP request/verification are implemented; JWT issuance is pending.
 
 No business-domain endpoints are available yet.
 
@@ -299,10 +299,16 @@ Implemented:
 Pending:
 
 - Custom User Model
-- OTP and JWT authentication
+- JWT authentication and refresh/logout
 - Business API endpoints
 - Resource-level authorization
 - Pagination and filtering implementation
 - Standardized application errors
 - Financial idempotency handling
 - Business endpoint tests
+
+## OTP API Update
+
+The OTP request and verification endpoints are now implemented in Phase 1.
+See `docs/OTP.md` for request/response examples, status codes, limits,
+and login-ticket behavior. JWT access/refresh/logout are **not** implemented yet.

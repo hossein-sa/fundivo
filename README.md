@@ -86,8 +86,7 @@ docker compose --env-file backend/.env up -d db
 python backend\manage.py check
 ```
 
-Do not run migrations yet. The initial Custom User
-Model must be implemented before the first migration.
+Run database migrations: `python backend\manage.py migrate`.
 
 ### 7. Run the development server
 
@@ -118,3 +117,11 @@ python -m ruff check backend
 ## License
 
 Not specified yet.
+
+## OTP Local Verification
+
+Start PostgreSQL and Redis: `docker compose --env-file backend/.env up -d db redis`.
+Use `POST /api/v1/auth/otp/request/` and `POST /api/v1/auth/otp/verify/`.
+In local development the code is written to **ignored** `backend/.otp-outbox`.
+Never upload that file; remove it when finished. OTP verification returns a
+short-lived login ticket; JWT issuance is a separate next step. See `docs/OTP.md`.
