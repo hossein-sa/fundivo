@@ -50,6 +50,7 @@ INSTALLED_APPS = [
 
     # Local applications
     "apps.accounts.apps.AccountsConfig",
+    "apps.funds.apps.FundsConfig",
 ]
 
 MIDDLEWARE = [

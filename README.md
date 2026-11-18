@@ -138,3 +138,11 @@ Install dependencies with `python -m pip install -r backend/requirements.txt`.
 Add a strong, independent `JWT_SIGNING_KEY` to your **untracked** `backend/.env`.
 Apply Simple JWT blacklist migrations: `python backend/manage.py migrate`.
 See `docs/JWT.md` for examples and security limitations.
+
+## Funds API — Phase 2 (initial slice)
+
+Authenticated users can create draft funds using `POST /api/v1/funds/`.
+The creator becomes the manager in the same database transaction.
+`GET /api/v1/funds/` lists only funds with an active membership.
+Other routes and the current limitations are documented in [docs/FUNDS.md](docs/FUNDS.md).
+Invitation acceptance, manager transfer, activation, financial settings and shares are not yet implemented.

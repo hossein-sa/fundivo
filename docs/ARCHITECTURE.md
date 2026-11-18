@@ -117,3 +117,9 @@ GitHub Actions runs automated checks for:
 - Initial database migrations have not been run.
 - Production deployment is not configured.
 - Frontend development has not started.
+
+## Funds module (implemented initial slice)
+
+The `apps.funds` module contains `Fund`, `FundMembership` and `AuditLog`.
+Fund creation and draft edits use a service layer with database transactions;
+fund-level querysets enforce access isolation. See [FUNDS.md](FUNDS.md).

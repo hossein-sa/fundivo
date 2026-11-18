@@ -329,3 +329,11 @@ permissions, and automated tests.
 
 No business-domain functionality is considered
 implemented merely because it is documented.
+
+## Fund creation and access — first implemented slice
+
+A verified active user may create a draft fund. Creation atomically assigns
+that user an active manager membership and writes an audit event.
+Draft `name` and `description` are manager-editable. A user can have roles in
+multiple funds. Invitation acceptance, manager transfer, activation and
+financial configuration remain pending; do not infer these are implemented.

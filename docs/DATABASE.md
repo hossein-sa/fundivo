@@ -205,3 +205,13 @@ This document is a preliminary conceptual design.
 The actual Django models, migrations, foreign keys,
 indexes, and database constraints will be implemented
 incrementally during the corresponding development phases.
+
+## Fund domain: implemented first migration
+
+`funds.Fund` (UUID, name, description, status, creator, timestamps),
+`funds.FundMembership` (UUID, fund FK, user FK, role, is_active, joined_at),
+and `funds.AuditLog` (UUID, fund FK, actor FK, action, target_id, changed_fields, created_at).
+Database constraints enforce unique `(fund,user)`, at most one active manager
+per fund, allowed roles/states and a non-empty fund name. A manager is created
+atomically with the fund. Guest membership and manager transfer are future work.
+See [FUNDS.md](FUNDS.md).

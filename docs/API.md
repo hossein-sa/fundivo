@@ -321,3 +321,11 @@ and login-ticket behavior. JWT access/refresh/logout are implemented; see docs/J
 - `GET /api/v1/auth/me/`: authenticated user's read-only identity profile.
 
 JWT Bearer is now the default DRF authentication backend. Previous planning notes about JWT being pending are superseded by this section. See `docs/JWT.md` for request examples and limitations.
+
+## Initial Funds API — implemented
+
+See [FUNDS.md](FUNDS.md) for permission rules, request/response examples and
+current limitations. Endpoints under `/api/v1/funds/` are JWT-protected:
+GET/POST list/create, GET/PATCH detail, GET own membership and GET memberships
+(manager only). List responses are paginated. Fund status and role are not
+client-writeable. Non-members receive 404 for protected fund resources.
