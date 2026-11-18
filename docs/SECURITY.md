@@ -478,3 +478,7 @@ verification are implemented for local development. Codes are visible only
 through an ignored local outbox, not in API responses/logs. JWT issuance,
 production SMS, and production-grade abuse controls remain pending.
 See `docs/OTP.md`.
+
+## Phase 1 JWT implementation update
+
+Simple JWT bearer authentication, refresh rotation, PostgreSQL-backed refresh-token blacklisting, and ticket exchange are implemented. An independent `JWT_SIGNING_KEY` is required. Protected requests and refreshes reject inactive or unverified users. Logout revokes only the supplied refresh token, **not** outstanding access tokens: access tokens remain valid for at most five minutes after issue. Immediate logout from all devices, production hardening, and secure browser token transport are not implemented. Prior status lists marking JWT as pending are superseded by this update. See `docs/JWT.md`.

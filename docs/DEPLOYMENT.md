@@ -119,3 +119,7 @@ The OTP backend stores expiring Redis challenges; Redis persistence is disabled.
 The local plaintext test outbox is `backend/.otp-outbox` (ignored by Git).
 It must **never** be used in production; a real SMS provider and operations
 review are still required. See `docs/OTP.md`.
+
+## JWT deployment prerequisites
+
+Add a strong, independently generated `JWT_SIGNING_KEY` through the deployment secret manager. Run `python backend/manage.py migrate` to create Simple JWT `OutstandingToken` and `BlacklistedToken` tables before accepting traffic. Ensure scheduled cleanup of expired blacklist/outstanding tokens (`flushexpiredtokens`), secret rotation policy, HTTPS, safe browser storage, and session-monitoring strategy are configured before a public release. Development test secrets must never be used in production.

@@ -401,3 +401,7 @@ declaring a development milestone complete.
 rate limits, cooldown, inactive users, single-use code consumption, and
 one-use login tickets using fakeredis. Production Redis connection is checked
 separately in GitHub Actions; a real concurrency stress test remains pending.
+
+## JWT tests (Phase 1)
+
+`backend/tests/test_jwt_auth.py` verifies ticket exchange, no ticket replay, invalid and expired tickets, profile access, refresh rotation and blacklisting, logout authorization, and inactive/unverified user denial. Run `python -m pytest -c backend/pytest.ini backend/tests -v`. The blacklist app's migrations are applied in CI. Previous sections listing JWT tests as pending are superseded by this update.

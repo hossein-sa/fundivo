@@ -80,7 +80,7 @@ Django REST Framework currently uses:
 - SessionAuthentication
 - IsAuthenticated as the default permission
 
-OTP request/verification are implemented; JWT issuance is pending.
+OTP verification and JWT session endpoints are implemented.
 
 No business-domain endpoints are available yet.
 
@@ -311,4 +311,13 @@ Pending:
 
 The OTP request and verification endpoints are now implemented in Phase 1.
 See `docs/OTP.md` for request/response examples, status codes, limits,
-and login-ticket behavior. JWT access/refresh/logout are **not** implemented yet.
+and login-ticket behavior. JWT access/refresh/logout are implemented; see docs/JWT.md.
+
+## Phase 1 JWT API (implemented)
+
+- `POST /api/v1/auth/token/exchange/`: consumes a one-use OTP `login_ticket`; returns `access`, `refresh`, `token_type`, `expires_in`.
+- `POST /api/v1/auth/token/refresh/`: consumes a refresh token, rotates it, and returns a new access/refresh pair.
+- `POST /api/v1/auth/logout/`: requires `Authorization: Bearer <access>` and that user's refresh token; blacklists the supplied refresh token; returns 204.
+- `GET /api/v1/auth/me/`: authenticated user's read-only identity profile.
+
+JWT Bearer is now the default DRF authentication backend. Previous planning notes about JWT being pending are superseded by this section. See `docs/JWT.md` for request examples and limitations.

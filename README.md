@@ -124,4 +124,17 @@ Start PostgreSQL and Redis: `docker compose --env-file backend/.env up -d db red
 Use `POST /api/v1/auth/otp/request/` and `POST /api/v1/auth/otp/verify/`.
 In local development the code is written to **ignored** `backend/.otp-outbox`.
 Never upload that file; remove it when finished. OTP verification returns a
-short-lived login ticket; JWT issuance is a separate next step. See `docs/OTP.md`.
+short-lived login ticket; JWT issuance is implemented; see docs/JWT.md. See `docs/OTP.md`.
+
+## JWT authentication (Phase 1)
+
+After OTP verification, exchange the one-time `login_ticket` at
+`POST /api/v1/auth/token/exchange/` for a JWT `access` and `refresh` pair.
+Use `Authorization: Bearer <access>` for protected APIs including `GET /api/v1/auth/me/`.
+Rotate refresh tokens at `POST /api/v1/auth/token/refresh/` and revoke a refresh token
+at `POST /api/v1/auth/logout/` (requires an access token).
+
+Install dependencies with `python -m pip install -r backend/requirements.txt`.
+Add a strong, independent `JWT_SIGNING_KEY` to your **untracked** `backend/.env`.
+Apply Simple JWT blacklist migrations: `python backend/manage.py migrate`.
+See `docs/JWT.md` for examples and security limitations.

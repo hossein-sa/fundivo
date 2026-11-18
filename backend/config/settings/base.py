@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 import os
+from datetime import timedelta
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -45,6 +46,7 @@ INSTALLED_APPS = [
     # Third-party applications
     "rest_framework",
     "drf_spectacular",
+    "rest_framework_simplejwt.token_blacklist",
 
     # Local applications
     "apps.accounts.apps.AccountsConfig",
@@ -140,7 +142,7 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.IsAuthenticated",
     ],
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.SessionAuthentication",
+        "apps.accounts.auth_tokens.VerifiedJWTAuthentication",
     ],
 }
 
@@ -158,3 +160,20 @@ AUTH_USER_MODEL = "accounts.User"
 # Redis-backed OTP. Keep the Redis service private to the application.
 REDIS_URL = os.getenv("REDIS_URL", "redis://127.0.0.1:6379/0")
 OTP_REDIS_PREFIX = "fundivo:otp:v1"
+
+# JWT (Simple JWT) session settings
+
+# Require a signing secret separate from Django's SECRET_KEY.
+JWT_SIGNING_KEY = os.environ["JWT_SIGNING_KEY"]
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
+    "ROTATE_REFRESH_TOKENS": True,
+    "BLACKLIST_AFTER_ROTATION": True,
+    "ALGORITHM": "HS256",
+    "SIGNING_KEY": JWT_SIGNING_KEY,
+    "AUTH_HEADER_TYPES": ("Bearer",),
+    "USER_ID_FIELD": "id",
+    "USER_ID_CLAIM": "user_id",
+    "UPDATE_LAST_LOGIN": False,
+}

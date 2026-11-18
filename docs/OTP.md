@@ -79,3 +79,7 @@ python -m pytest -c backend/pytest.ini backend/tests -v
 python -m ruff check backend
 python backend/manage.py spectacular --validate --fail-on-warn
 ```
+
+## After verification: JWT exchange
+
+The OTP verify endpoint still returns a one-use 120-second login ticket (not a JWT). Its consumer is now `POST /api/v1/auth/token/exchange/`. The ticket can only be exchanged once. The resulting access/refresh pair is managed as described in `docs/JWT.md`.

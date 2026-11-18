@@ -8,6 +8,7 @@ and plans to use Semantic Versioning for releases.
 ## [Unreleased]
 
 ### Added
+- OTP login-ticket exchange, JWT access/refresh rotation, refresh-token blacklist logout, and read-only profile API.
 - Redis-backed OTP verification endpoints, rate limiting, and one-time login tickets (JWT exchange pending).
 - Initial monorepo structure.
 - Django 5.2 LTS backend with Python 3.12.
