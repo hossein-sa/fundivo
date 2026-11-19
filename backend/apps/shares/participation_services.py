@@ -4,7 +4,7 @@ from django.db import transaction
 from django.shortcuts import get_object_or_404
 from rest_framework.exceptions import PermissionDenied, ValidationError
 
-from apps.funds.models import AuditLog, Fund, FundMembership
+from apps.funds.models import AuditLog, Fund, FundMembership, GuestSponsorship
 from apps.funds.services import FundConflict
 
 from .models import Share, ShareParticipation
@@ -50,18 +50,21 @@ def propose_shared_participation(*, fund_id, share_id, actor, request_id, partic
     if len(current) != 1 or current[0].membership_id != share.membership_id or current[0].units != 12:
         raise FundConflict("Existing participation is not an unsplit whole share.")
 
-    eligible_ids = set(
-        FundMembership.objects.filter(
-            fund=fund,
-            pk__in=desired,
-            is_active=True,
-            user__isnull=False,  # guest sponsors/acceptance are a separate feature
-        ).values_list("pk", flat=True)
-    )
-    if eligible_ids != set(desired):
-        raise ValidationError(
-            {"participants": ["Participants must be active registered members of this fund."]}
-        )
+    eligible = list(FundMembership.objects.filter(
+        fund=fund, pk__in=desired, is_active=True,
+    ))
+    if {item.pk for item in eligible} != set(desired):
+        raise ValidationError({"participants": ["All participants must be active fund members."]})
+    # A guest may co-own a draft share only after explicit sponsor consent
+    # and manager approval. An old unsponsored guest cannot join a new split.
+    guest_ids = {item.pk for item in eligible if item.user_id is None}
+    approved_guest_ids = set(GuestSponsorship.objects.filter(
+        fund=fund,
+        guest_membership_id__in=guest_ids,
+        status=GuestSponsorship.Status.ACTIVE,
+    ).values_list("guest_membership_id", flat=True))
+    if approved_guest_ids != guest_ids:
+        raise ValidationError({"participants": ["Guest co-owners need approved sponsorship."]})
     if Share.objects.filter(participation_revision_id=request_id).exclude(pk=share.pk).exists():
         raise FundConflict("This request ID was already used for another share.")
 

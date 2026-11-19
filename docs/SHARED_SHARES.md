@@ -104,3 +104,7 @@ produces `[333334,333333,333333]`; changing `rotation` cycles an extra rial
 across otherwise equal partners. This is *not* a payment, debt, or database
 operation. Unit order must be stable and the future installments must preserve
 the computed amounts rather than recalculating past rounds.
+
+## Sponsored guest fractions
+
+A guest with an active accepted `GuestSponsorship` may now be listed as a fractional owner in a draft `ShareParticipation`. The sponsor may see their guest's share but is not thereby the beneficiary. Guests without approved sponsorship cannot join a new split. No installment liabilities are generated in this phase.

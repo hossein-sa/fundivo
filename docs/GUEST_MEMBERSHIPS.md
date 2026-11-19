@@ -34,3 +34,7 @@ Returns HTTP `201` with a membership representation containing an `id`, `user_id
 ## Testing
 
 The suite tests authenticated manager creation, nonmanager/outsider restrictions, no user account creation, draft-only behavior, response shape, validation, database check constraints, atomic audit rollback, and allocation of a draft share to a guest.
+
+## Approved sponsorship
+
+For financial responsibility, use the separate [sponsorship request and approval workflow](GUEST_SPONSORSHIP.md). The old manager-only guest creation endpoint remains for compatibility and does not imply anyone has accepted financial responsibility.

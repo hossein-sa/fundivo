@@ -357,3 +357,7 @@ Existing manager-only membership list now includes guest records. This is not
 an invitation, nor a user account registration flow.
 
 See [Shared Shares](SHARED_SHARES.md) for the draft share participation endpoint and its authorization contract.
+
+## Guest sponsorship (draft)
+
+`POST /api/v1/funds/{fund_id}/guest-sponsorships/` accepts a unique `request_id`, `guest_name`, optionally `sponsor_membership_id`, and `accept_responsibility`. Nominated sponsors call `/accept/`; managers call `/approve/`. Existing guests use `/guest-memberships/{guest_id}/sponsorship/`. Scoped `GET` lists sponsorship requests. See [Guest Sponsorship](GUEST_SPONSORSHIP.md).

@@ -54,3 +54,10 @@ No official versions have been released yet.
 
 ### Added — draft shared-share participation
 - Integer 12-unit participations, legacy share backfill, one-time manager-proposed split, draft-only lottery eligibility policy.
+
+### Added — consent-based guest sponsorship
+
+- Draft sponsor requests, explicit registered-member consent and manager approval.
+- Separate attachment for existing unsponsored guests; no retroactive consent.
+- Approved sponsored guests can participate in fractional draft shares.
+- No payment liability, installment, payout or account claim is generated.

@@ -1,5 +1,6 @@
 """Fund-scoped shares: managers see all; members see only their own."""
 
+from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from drf_spectacular.utils import extend_schema
 from rest_framework import generics, status
@@ -7,7 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from apps.funds.models import FundMembership
+from apps.funds.models import FundMembership, GuestSponsorship
 from apps.funds.views import FundPagination, visible_fund_or_404
 
 from .models import Share
@@ -26,7 +27,13 @@ def visible_shares(*, user, fund_id):
     )
     queryset = Share.objects.filter(fund=fund)
     if membership.role != FundMembership.Role.MANAGER:
-        queryset = queryset.filter(participations__membership=membership).distinct()
+        queryset = queryset.filter(
+            Q(participations__membership=membership)
+            | Q(
+                participations__membership__guest_sponsorship__sponsor_membership=membership,
+                participations__membership__guest_sponsorship__status=GuestSponsorship.Status.ACTIVE,
+            )
+        ).distinct()
     return queryset
 
 

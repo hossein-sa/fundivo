@@ -7,6 +7,13 @@ from apps.shares.participation_views import ShareParticipationsView
 from apps.shares.views import FundShareDetailView, FundSharesView
 
 from .guest_views import FundGuestMembershipCreateView
+from .sponsorship_views import (
+    GuestSponsorshipAttachView,
+    GuestSponsorshipListCreateView,
+    SponsorshipAcceptView,
+    SponsorshipApproveView,
+    SponsorshipRejectView,
+)
 from .views import (
     FundDetailView,
     FundListCreateView,
@@ -15,6 +22,31 @@ from .views import (
 )
 
 urlpatterns = [
+    path(
+        "<uuid:fund_id>/guest-sponsorships/",
+        GuestSponsorshipListCreateView.as_view(),
+        name="fund-guest-sponsorship-list",
+    ),
+    path(
+        "<uuid:fund_id>/guest-memberships/<uuid:guest_id>/sponsorship/",
+        GuestSponsorshipAttachView.as_view(),
+        name="fund-guest-sponsorship-attach",
+    ),
+    path(
+        "<uuid:fund_id>/guest-sponsorships/<uuid:sponsorship_id>/accept/",
+        SponsorshipAcceptView.as_view(),
+        name="fund-guest-sponsorship-accept",
+    ),
+    path(
+        "<uuid:fund_id>/guest-sponsorships/<uuid:sponsorship_id>/approve/",
+        SponsorshipApproveView.as_view(),
+        name="fund-guest-sponsorship-approve",
+    ),
+    path(
+        "<uuid:fund_id>/guest-sponsorships/<uuid:sponsorship_id>/reject/",
+        SponsorshipRejectView.as_view(),
+        name="fund-guest-sponsorship-reject",
+    ),
     path(
         "<uuid:fund_id>/shares/<uuid:share_id>/participations/",
         ShareParticipationsView.as_view(),

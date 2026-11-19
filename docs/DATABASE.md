@@ -243,3 +243,7 @@ prevent a guest from being manager. Existing registered `(fund, user)` uniquenes
 is retained; PostgreSQL allows multiple guest rows with null `user`.
 
 See [Shared Shares](SHARED_SHARES.md) for 12-unit ShareParticipation data migration, constraints and historical ownership limitations.
+
+## GuestSponsorship
+
+Separate `GuestSponsorship` FK to fund, one-to-one guest membership, FK to registered sponsor membership, immutable `request_id`, status and consent/approval timestamps. No old guest/share rows change during migration. Cross-record same-fund and registered-sponsor invariants are enforced in locked services; PostgreSQL checks valid statuses and active-consent timestamps.

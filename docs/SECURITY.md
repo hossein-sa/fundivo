@@ -519,3 +519,7 @@ based solely on name or phone are forbidden; future linking needs explicit
 verification and acceptance. Audit logs exclude the guest name itself.
 
 Draft shared-share proposals are manager-only, fund-scoped, one-time, audit logged, and do not confer consent or financial liability. See [Shared Shares](SHARED_SHARES.md).
+
+## Sponsorship security
+
+Fund-scoped visibility: manager sees sponsorships, sponsor sees their own. Other members and outsiders cannot inspect or approve. A manager cannot accept consent for someone else. No guest tokens, phone identities, or unverified guest account linking. Shared participation requires active sponsorship for a guest.

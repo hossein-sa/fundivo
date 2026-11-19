@@ -109,6 +109,57 @@ class FundMembership(models.Model):
         return f"{self.fund_id}: {identity} ({self.role})"
 
 
+class GuestSponsorship(models.Model):
+    """Accepted sponsor of a guest; not an installment or financial ledger."""
+
+    class Status(models.TextChoices):
+        PENDING_SPONSOR = "pending_sponsor", "Pending sponsor consent"
+        PENDING_MANAGER = "pending_manager", "Pending manager approval"
+        ACTIVE = "active", "Active"
+        REJECTED = "rejected", "Rejected"
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    request_id = models.UUIDField(unique=True)
+    fund = models.ForeignKey(
+        Fund, related_name="guest_sponsorships", on_delete=models.PROTECT
+    )
+    guest_membership = models.OneToOneField(
+        FundMembership, related_name="guest_sponsorship", on_delete=models.PROTECT
+    )
+    sponsor_membership = models.ForeignKey(
+        FundMembership, related_name="sponsored_guest_requests", on_delete=models.PROTECT
+    )
+    requested_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        related_name="guest_sponsorship_requests",
+        on_delete=models.PROTECT,
+    )
+    is_legacy_attachment = models.BooleanField(default=False)
+    status = models.CharField(max_length=20, choices=Status.choices)
+    sponsor_accepted_at = models.DateTimeField(null=True, blank=True)
+    approved_at = models.DateTimeField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ("-created_at", "-id")
+        constraints = (
+            models.CheckConstraint(
+                condition=Q(status__in=["pending_sponsor", "pending_manager", "active", "rejected"]),
+                name="guest_sponsorship_valid_status",
+            ),
+            models.CheckConstraint(
+                condition=~Q(status="active") | (
+                    Q(sponsor_accepted_at__isnull=False) & Q(approved_at__isnull=False)
+                ),
+                name="guest_active_sponsorship_approved",
+            ),
+        )
+
+    def __str__(self):
+        return f"Guest sponsorship {self.id}: {self.status}"
+
+
 class AuditLog(models.Model):
     """Non-user-editable application event; not a tamper-proof ledger."""
 

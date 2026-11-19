@@ -170,3 +170,7 @@ cannot authenticate or claim ownership automatically. See
 [guest membership rules](docs/GUEST_MEMBERSHIPS.md).
 
 See [Shared Shares](docs/SHARED_SHARES.md) for draft fractional participation and lottery eligibility policy.
+
+## Guest sponsor consent (draft)
+
+Members can request a guest they will sponsor; manager approves. A manager may nominate a different sponsor, who must explicitly accept. Legacy guests can be attached without changing shares. See [Guest Sponsorship](docs/GUEST_SPONSORSHIP.md).

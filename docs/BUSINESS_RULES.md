@@ -365,3 +365,7 @@ be allocated to that membership. Guest identity linking, cancellation, edits,
 transfer, payouts and obligations are not implemented or authorized.
 
 BR-039: Fund manager selects `fully_settled` or `allow_outstanding` in draft; it is frozen upon activation. It will only be enforced after installments/lotteries exist. See [Shared Shares](SHARED_SHARES.md).
+
+## Guest sponsorship consent
+
+No member receives responsibility for a guest through manager nomination alone. Explicit sponsor acceptance is required, followed by manager approval. Sponsor and beneficiary are distinct. No monetary obligations are generated at this phase. Legacy guest sponsorship must be actively approved, not inferred.
