@@ -3,6 +3,7 @@
 from rest_framework import serializers
 
 from .models import Share
+from .participation_serializers import ParticipationReadSerializer
 
 
 class ShareAllocationSerializer(serializers.Serializer):
@@ -20,11 +21,13 @@ class ShareAllocationSerializer(serializers.Serializer):
 
 
 class ShareReadSerializer(serializers.ModelSerializer):
+    # Legacy membership_id denotes initial allottee; the rows below are authoritative.
     membership_id = serializers.UUIDField(read_only=True)
+    participations = ParticipationReadSerializer(many=True, read_only=True)
 
     class Meta:
         model = Share
-        fields = ("id", "number", "membership_id", "created_at")
+        fields = ("id", "number", "membership_id", "participations", "created_at")
         read_only_fields = fields
 
 

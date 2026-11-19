@@ -168,3 +168,5 @@ Fund managers can record named guest placeholders while a fund is in draft,
 without creating a login account. Guest memberships can hold draft shares but
 cannot authenticate or claim ownership automatically. See
 [guest membership rules](docs/GUEST_MEMBERSHIPS.md).
+
+See [Shared Shares](docs/SHARED_SHARES.md) for draft fractional participation and lottery eligibility policy.

@@ -79,3 +79,5 @@ No migration or API in this slice silently implements those policies.
 A draft share may be allocated to a guest membership by its UUID using the
 existing allocation service and capacity/idempotency rules. This does not grant
 login access or imply a verified identity; transfer and claiming are pending.
+
+Shared draft participation (12 integer units/share) is described in [SHARED_SHARES.md](SHARED_SHARES.md).

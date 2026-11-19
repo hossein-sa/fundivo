@@ -433,3 +433,5 @@ Use the existing PostgreSQL-backed pytest suite and CI pipeline.
 `backend/tests/test_guest_memberships.py` covers manager-only creation,
 registered/member isolation, empty names/forbidden fields, draft-only state,
 PostgreSQL identity constraints, audit rollback, and guest draft share ownership.
+
+`backend/tests/test_shared_shares.py` covers exact half/third units, access isolation, idempotency, fund state, DB constraints, rollback, and policy draft freezing.

@@ -120,3 +120,5 @@ future work.
 Draft funds may include registered members and non-login guest placeholders.
 Only the active fund manager can create guests; existing manager-only membership
 listing includes both types. See [GUEST_MEMBERSHIPS.md](GUEST_MEMBERSHIPS.md).
+
+Draft fund managers may set the frozen-after-activation lottery eligibility policy. Implementation remains pending lottery and installment phases.

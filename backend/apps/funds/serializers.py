@@ -38,7 +38,7 @@ class FundCreateSerializer(StrictWriteSerializer):
 class FundEditSerializer(StrictWriteSerializer):
     class Meta:
         model = Fund
-        fields = ("name", "description", "target_share_count")
+        fields = ("name", "description", "target_share_count", "lottery_eligibility_policy")
 
 
 class FundReadSerializer(serializers.ModelSerializer):
@@ -47,7 +47,7 @@ class FundReadSerializer(serializers.ModelSerializer):
     class Meta:
         model = Fund
         fields = (
-            "id", "name", "description", "target_share_count", "status", "created_at", "updated_at", "my_role"
+            "id", "name", "description", "target_share_count", "lottery_eligibility_policy", "status", "created_at", "updated_at", "my_role"
         )
         read_only_fields = fields
 

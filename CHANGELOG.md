@@ -51,3 +51,6 @@ No official versions have been released yet.
 - Draft-only, manager-created guest memberships with no registered user account.
 - Guest/registered identity database checks and restricted roster representation.
 - Transactional guest creation with audit events; draft share ownership supported.
+
+### Added — draft shared-share participation
+- Integer 12-unit participations, legacy share backfill, one-time manager-proposed split, draft-only lottery eligibility policy.

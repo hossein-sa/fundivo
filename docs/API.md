@@ -355,3 +355,5 @@ Manager-only `POST /api/v1/funds/{fund_id}/guest-memberships/` accepts
 `user_id: null`, `is_guest: true`, `guest_name`, and `role: "member"`.
 Existing manager-only membership list now includes guest records. This is not
 an invitation, nor a user account registration flow.
+
+See [Shared Shares](SHARED_SHARES.md) for the draft share participation endpoint and its authorization contract.

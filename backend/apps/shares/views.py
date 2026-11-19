@@ -26,7 +26,7 @@ def visible_shares(*, user, fund_id):
     )
     queryset = Share.objects.filter(fund=fund)
     if membership.role != FundMembership.Role.MANAGER:
-        queryset = queryset.filter(membership=membership)
+        queryset = queryset.filter(participations__membership=membership).distinct()
     return queryset
 
 

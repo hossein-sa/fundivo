@@ -363,3 +363,5 @@ An active manager may create a named guest member of a draft fund. This is an
 administrative placeholder and grants no access to Fundivo. Draft shares can
 be allocated to that membership. Guest identity linking, cancellation, edits,
 transfer, payouts and obligations are not implemented or authorized.
+
+BR-039: Fund manager selects `fully_settled` or `allow_outstanding` in draft; it is frozen upon activation. It will only be enforced after installments/lotteries exist. See [Shared Shares](SHARED_SHARES.md).

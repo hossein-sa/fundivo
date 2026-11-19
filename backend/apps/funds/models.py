@@ -15,9 +15,18 @@ class Fund(models.Model):
         COMPLETED = "completed", "Completed"
         CANCELLED = "cancelled", "Cancelled"
 
+    class LotteryEligibilityPolicy(models.TextChoices):
+        FULLY_SETTLED = "fully_settled", "Fully settled"
+        ALLOW_OUTSTANDING = "allow_outstanding", "Allow outstanding"
+
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=120)
     description = models.TextField(blank=True)
+    lottery_eligibility_policy = models.CharField(
+        max_length=24,
+        choices=LotteryEligibilityPolicy.choices,
+        default=LotteryEligibilityPolicy.FULLY_SETTLED,
+    )
     target_share_count = models.PositiveIntegerField(null=True, blank=True)
     status = models.CharField(max_length=12, choices=Status.choices, default=Status.DRAFT)
     created_by = models.ForeignKey(
@@ -32,6 +41,10 @@ class Fund(models.Model):
         ordering = ("-created_at", "-id")
         constraints = (
             models.CheckConstraint(condition=~Q(name=""), name="fund_name_not_empty"),
+            models.CheckConstraint(
+                condition=Q(lottery_eligibility_policy__in=["fully_settled", "allow_outstanding"]),
+                name="fund_valid_lottery_eligibility_policy",
+            ),
             models.CheckConstraint(
                 condition=Q(target_share_count__isnull=True) | Q(target_share_count__gte=1),
                 name="fund_target_shares_positive",

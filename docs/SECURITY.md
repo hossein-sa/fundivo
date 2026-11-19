@@ -517,3 +517,5 @@ an active verified manager and draft fund. Public request fields cannot set
 role or user identity. A database constraint blocks guest managers. Claims
 based solely on name or phone are forbidden; future linking needs explicit
 verification and acceptance. Audit logs exclude the guest name itself.
+
+Draft shared-share proposals are manager-only, fund-scoped, one-time, audit logged, and do not confer consent or financial liability. See [Shared Shares](SHARED_SHARES.md).

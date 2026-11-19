@@ -7,7 +7,7 @@ from rest_framework.exceptions import PermissionDenied
 from apps.funds.models import AuditLog, Fund, FundMembership
 from apps.funds.services import FundConflict
 
-from .models import Share
+from .models import Share, ShareParticipation
 
 
 @transaction.atomic
@@ -62,6 +62,11 @@ def allocate_shares(*, fund_id, actor, membership_id, count, allocation_id):
         for position in range(1, count + 1)
     ]
     Share.objects.bulk_create(new_shares)
+    # Every new individually allocated share begins with a full 12/12 holding.
+    ShareParticipation.objects.bulk_create(
+        [ShareParticipation(share=share, membership=membership, units=12)
+         for share in new_shares]
+    )
     AuditLog.objects.create(
         fund=fund,
         actor=actor,

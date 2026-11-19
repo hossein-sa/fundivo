@@ -241,3 +241,5 @@ transfer workflow exists yet.
 empty for registered memberships; CheckConstraints enforce representation and
 prevent a guest from being manager. Existing registered `(fund, user)` uniqueness
 is retained; PostgreSQL allows multiple guest rows with null `user`.
+
+See [Shared Shares](SHARED_SHARES.md) for 12-unit ShareParticipation data migration, constraints and historical ownership limitations.
