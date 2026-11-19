@@ -347,3 +347,11 @@ Managers allocate via `POST /api/v1/funds/{fund_id}/shares/` with JSON
 Initial success returns 201; the same request ID and matching inputs return
 200 without additional shares. Conflicting reuse or exceeded capacity returns
 409. Allocation is limited to active memberships and draft funds.
+
+## Guest membership API (initial implementation)
+
+Manager-only `POST /api/v1/funds/{fund_id}/guest-memberships/` accepts
+`{"guest_name": "Sample Guest"}` and returns `201` with membership UUID,
+`user_id: null`, `is_guest: true`, `guest_name`, and `role: "member"`.
+Existing manager-only membership list now includes guest records. This is not
+an invitation, nor a user account registration flow.

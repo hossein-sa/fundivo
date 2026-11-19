@@ -62,9 +62,16 @@ class FundReadSerializer(serializers.ModelSerializer):
 
 
 class MembershipReadSerializer(serializers.ModelSerializer):
-    user_id = serializers.UUIDField(read_only=True)
+    user_id = serializers.UUIDField(read_only=True, allow_null=True)
+    is_guest = serializers.SerializerMethodField()
 
     class Meta:
         model = FundMembership
-        fields = ("id", "user_id", "role", "is_active", "joined_at")
+        fields = (
+            "id", "user_id", "guest_name", "is_guest", "role", "is_active", "joined_at"
+        )
         read_only_fields = fields
+
+    @extend_schema_field(serializers.BooleanField())
+    def get_is_guest(self, obj):
+        return obj.user_id is None

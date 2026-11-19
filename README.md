@@ -161,3 +161,10 @@ individual shares to active registered memberships, and safely retry allocations
 using a client-generated UUID (`allocation_id`). Managers can list all shares;
 ordinary members can list and read only their own shares. See [SHARES](docs/SHARES.md).
 Guest membership, share transfers, money amounts and fund activation are pending.
+
+## Guest fund memberships
+
+Fund managers can record named guest placeholders while a fund is in draft,
+without creating a login account. Guest memberships can hold draft shares but
+cannot authenticate or claim ownership automatically. See
+[guest membership rules](docs/GUEST_MEMBERSHIPS.md).

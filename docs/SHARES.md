@@ -73,3 +73,9 @@ Direct model writes outside the service are not a supported business API.
 - Round creation, installments, winner selection and settlement
 
 No migration or API in this slice silently implements those policies.
+
+## Guest-owned draft shares
+
+A draft share may be allocated to a guest membership by its UUID using the
+existing allocation service and capacity/idempotency rules. This does not grant
+login access or imply a verified identity; transfer and claiming are pending.

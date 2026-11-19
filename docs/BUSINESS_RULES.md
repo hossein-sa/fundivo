@@ -356,3 +356,10 @@ Each share has its own UUID and per-fund sequence number. A member may own
 multiple shares and the manager need not hold any. Retried requests with a
 matching allocation UUID do not create new shares. Transfer, guest ownership,
 exit, rounding, obligations and activation remain OPEN.
+
+## Guest members (implemented draft-only slice)
+
+An active manager may create a named guest member of a draft fund. This is an
+administrative placeholder and grants no access to Fundivo. Draft shares can
+be allocated to that membership. Guest identity linking, cancellation, edits,
+transfer, payouts and obligations are not implemented or authorized.

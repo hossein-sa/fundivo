@@ -114,3 +114,9 @@ Draft funds may set `target_share_count`; it cannot be reduced below the
 number of allocated shares. See [SHARES.md](SHARES.md) for allocation and
 visibility rules. Financial settings, activation and manager transfers remain
 future work.
+
+## Guest memberships
+
+Draft funds may include registered members and non-login guest placeholders.
+Only the active fund manager can create guests; existing manager-only membership
+listing includes both types. See [GUEST_MEMBERSHIPS.md](GUEST_MEMBERSHIPS.md).

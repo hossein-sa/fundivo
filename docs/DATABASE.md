@@ -234,3 +234,10 @@ foreign keys does not by itself enforce a composite cross-fund invariant.
 Database constraints, a locked fund row, and a transaction protect unique
 numbering and capacity during service-level allocations. No share deletion or
 transfer workflow exists yet.
+
+## Guest membership schema (implemented)
+
+`FundMembership.user` is now nullable. `guest_name` is nonempty for guests and
+empty for registered memberships; CheckConstraints enforce representation and
+prevent a guest from being manager. Existing registered `(fund, user)` uniqueness
+is retained; PostgreSQL allows multiple guest rows with null `user`.

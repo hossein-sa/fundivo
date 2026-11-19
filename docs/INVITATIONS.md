@@ -86,3 +86,10 @@ Once an invitation is accepted, the resulting active registered membership
 can receive one or more shares from the fund manager during draft. Issuing or
 accepting an invitation does not automatically allocate shares. See
 [SHARES.md](SHARES.md).
+
+## Guests are not invitations
+
+The separate guest placeholder feature does not automatically convert into a
+registered member, even if a later verified account has a similar name.
+Invitation acceptance keeps using the verified-user flow; claiming guest shares
+requires a future explicitly approved workflow.

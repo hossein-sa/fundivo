@@ -136,3 +136,10 @@ The `apps.shares` domain stores individual participation units, separate
 from user identity and membership role. Allocations are managed by a service
 with fund row locking and audit logging; non-manager reads are restricted to
 shares owned by their membership. See [SHARES.md](SHARES.md).
+
+## Guest memberships
+
+`FundMembership` supports registered users or draft-only guest placeholders.
+Guest creation is a manager-only transactional service. Shares attach to the
+membership, not a verified User, preserving the boundary for future ownership
+claims and transfer policy design.

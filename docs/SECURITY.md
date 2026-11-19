@@ -509,3 +509,11 @@ A fund-level PostgreSQL lock serializes allocations and protects capacity.
 Allocation IDs protect against accidental duplicate API retries. Assignment
 and audit occur in one database transaction. This does not yet provide an
 immutable financial ledger or complete share-transfer security.
+
+## Guest access boundary
+
+Guest records have no User or tokens and cannot authenticate. Creation requires
+an active verified manager and draft fund. Public request fields cannot set
+role or user identity. A database constraint blocks guest managers. Claims
+based solely on name or phone are forbidden; future linking needs explicit
+verification and acceptance. Audit logs exclude the guest name itself.

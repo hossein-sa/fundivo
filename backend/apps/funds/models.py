@@ -57,7 +57,10 @@ class FundMembership(models.Model):
         settings.AUTH_USER_MODEL,
         related_name="fund_memberships",
         on_delete=models.PROTECT,
+        null=True,
+        blank=True,
     )
+    guest_name = models.CharField(max_length=120, blank=True, default="")
     role = models.CharField(max_length=8, choices=Role.choices, default=Role.MEMBER)
     is_active = models.BooleanField(default=True)
     joined_at = models.DateTimeField(auto_now_add=True)
@@ -66,6 +69,17 @@ class FundMembership(models.Model):
         ordering = ("joined_at", "id")
         constraints = (
             models.UniqueConstraint(fields=("fund", "user"), name="unique_user_per_fund"),
+            models.CheckConstraint(
+                condition=(
+                    Q(user__isnull=False, guest_name="")
+                    | (Q(user__isnull=True) & ~Q(guest_name=""))
+                ),
+                name="fund_membership_guest_identity",
+            ),
+            models.CheckConstraint(
+                condition=~Q(role="manager") | Q(user__isnull=False),
+                name="fund_manager_requires_user",
+            ),
             models.UniqueConstraint(
                 fields=("fund",),
                 condition=Q(role="manager", is_active=True),
@@ -78,7 +92,8 @@ class FundMembership(models.Model):
         )
 
     def __str__(self):
-        return f"{self.fund_id}: {self.user_id} ({self.role})"
+        identity = self.user_id if self.user_id else f"guest: {self.guest_name}"
+        return f"{self.fund_id}: {identity} ({self.role})"
 
 
 class AuditLog(models.Model):

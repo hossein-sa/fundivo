@@ -427,3 +427,9 @@ Use the existing full pytest/CI workflow; no real SMS service is called.
 isolation, capacity, allocation idempotency, target count edits, rejected
 cross-fund membership IDs, database uniqueness constraints and atomic rollback.
 Use the existing PostgreSQL-backed pytest suite and CI pipeline.
+
+## Guest membership tests
+
+`backend/tests/test_guest_memberships.py` covers manager-only creation,
+registered/member isolation, empty names/forbidden fields, draft-only state,
+PostgreSQL identity constraints, audit rollback, and guest draft share ownership.

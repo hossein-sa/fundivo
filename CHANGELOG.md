@@ -45,3 +45,9 @@ No official versions have been released yet.
 - Share UUIDs and per-fund sequential numbers with database uniqueness constraints.
 - Draft share capacity and atomic, idempotent manager-only allocation.
 - Fund-scoped share reads, audit events and permission/integrity tests.
+
+### Added — guest membership foundations
+
+- Draft-only, manager-created guest memberships with no registered user account.
+- Guest/registered identity database checks and restricted roster representation.
+- Transactional guest creation with audit events; draft share ownership supported.

@@ -5,6 +5,7 @@ from django.urls import path
 from apps.invitations.views import FundInvitationsView, InvitationRevokeView
 from apps.shares.views import FundShareDetailView, FundSharesView
 
+from .guest_views import FundGuestMembershipCreateView
 from .views import (
     FundDetailView,
     FundListCreateView,
@@ -13,6 +14,11 @@ from .views import (
 )
 
 urlpatterns = [
+    path(
+        "<uuid:fund_id>/guest-memberships/",
+        FundGuestMembershipCreateView.as_view(),
+        name="fund-guest-membership-create",
+    ),
     path("<uuid:fund_id>/shares/", FundSharesView.as_view(), name="fund-share-list"),
     path(
         "<uuid:fund_id>/shares/<uuid:share_id>/",

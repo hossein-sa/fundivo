@@ -25,7 +25,7 @@ class FundAdmin(ReadOnlyFundAdmin):
 
 @admin.register(FundMembership)
 class FundMembershipAdmin(ReadOnlyFundAdmin):
-    list_display = ("fund", "user", "role", "is_active", "joined_at")
+    list_display = ("fund", "user", "guest_name", "role", "is_active", "joined_at")
     list_filter = ("role", "is_active")
 
 
